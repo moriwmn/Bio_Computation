@@ -16,7 +16,7 @@ def print_graph(graph, offset):
 
 def print_time(t):
     # t is in seconds
-    if t > 60:  return str(round(t/60),3) + " minutes"
+    if t > 60:  return str(round(t/60,3)) + " minutes"
     elif t > 1: return str(round(t,3)) + " seconds"
     else:       return str(round(t*100,3)) + " mili-seconds"
 
@@ -89,12 +89,12 @@ def part1(input_n):
     print("printing all connected graphs with ",n," vertices")
     print("overall calculation time: ", print_time(t2-t1))
     print("")
-    print("overall count = \n",len(graphs))
+    print("overall count = ",len(graphs),"\n")
     index = 1 
     graphs.reverse()
     for graph in graphs:
-        # print("#",index)
-        # print_graph(graph,1)
+        print("#",index)
+        print_graph(graph,1)
         index+=1
 
 
@@ -105,6 +105,9 @@ def part2(n, path_to_graph):
     print("")
     n = int(n)
     input_graph = read_graph(path_to_graph)
+    print("input graph:")
+    print_graph(input_graph,0)
+    print("")
     t1 = time.time()
     graphs_n = all_connected_graphs(n) #get all connected graphs in size n (motifs)
     t2 = time.time()
