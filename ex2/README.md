@@ -1,6 +1,6 @@
 # Bio Computation exercise 2
 
-    submmiters: Arbel Braun, Moriya Weitzman
+    submmitted by: Arbel Braun, Moriya Weitzman
 
 ## About 
 
@@ -12,13 +12,14 @@
 
     - python (version 3+)
     - NetworkX
-        windows: pip install 
-        linux (ubuntu): 
+        windows:        $ pip install networkx
+        linux (ubuntu): $ sudo apt-get install -y python3-networkx
 
 ## How to run
     
     clone the repository
-        $ git clone <URL>
+        $ git clone https://github.com/moriwmn/Bio_Computation
+        $ cd Bio_Computation\ex2
     for part 1:
         to get all possible connection graphs of size n-
             $ python ex2.py 1 <n>
@@ -32,10 +33,11 @@
         to run part 2 with a given input graph:
             $ python ex2.py 2 <n: up to 4> examples/input_graphs/input1.txt
             (for linux- python3)
+
 ## See the results 
 
-    examples for some runnings can be found under examples/res_part<1/2>
-    please note that the examples are only for small values of n (see NP-C problem section bellow)
+    examples for some runs can be found under examples/res_part<1/2>
+    please note that the examples are only for small values of n (see Complexity section bellow)
 
 ## The algorithm
 
@@ -51,13 +53,13 @@
         this optimization is correct since isomorphic graphs generate the same subgraphs, and connected subgraphs of disconnected graphs will apear as subgraphs of another connected graphs, in later iteration.
 
         optimization affect:
-            for example for n=3:
-            before:
-            after:
+            n=3:
+            before:  0.945 mili-seconds
+            after:   0.88 mili-seconds
             
-            for n=4:
-            before:
-            after: 
+            n=4:
+            before:  74.355 mili-seconds
+            after:   72.872 mili-seconds
 
     part 2:
 
@@ -67,8 +69,9 @@
         - we calculate the all motifs (all possible graphs of size n) uzing part 1 function
         - we calculate all subgraphs of size n of the input graphs uzing the all possible combinations of n-nudes of the graph.
         - finally, we go over all motifs and for each one we go over all subgraphs we calculated and check if the subgraph isomorphic to the motif.
+        # optimization idea (not yet implemnted): removing all subgraphs (instances) once fit to a specipic motif. since the motifs are non-isomorphic, subgraph that belongs to one motif does not belong to others and can be removed from the list for the rest of the computation. 
 
 
-## NP-C Problem
+## Complexity
 
-    the code 
+    
