@@ -1,4 +1,4 @@
-# Bio_Computation exercise 2
+# Bio Computation exercise 2
 
     submmiters: Arbel Braun, Moriya Weitzman
 
@@ -10,22 +10,28 @@
 
 ## prerequisites:
 
-        python (version 3+)
+    - python (version 3+)
+    - NetworkX
+        windows: pip install 
+        linux (ubuntu): 
 
 ## How to run
     
     clone the repository
         $ git clone <URL>
     for part 1:
-    to get all possible connection graphs of size n-
-        $ python ex2.py 1 <n>
+        to get all possible connection graphs of size n-
+            $ python ex2.py 1 <n>
+            (for linux- python3)
     for part 2:
-    to get all possible subgraphs of size n for a spesipic graph-
-        $ python ex2.py 2 <n> <path_to_input_file>
-    input file is supposed to contains a descriptaion of a graph, when every line contains one edge [u v]
+        to get all possible subgraphs of size n for a spesipic graph-
+            $ python ex2.py 2 <n> <path_to_input_file>
+            (for linux- python3)
+        input file is supposed to contains a descriptaion of a graph, when every line contains one edge [u v]
 
-    to run part 2 with a given input graph:
-        $ python ex2.py 2 <n: up to 4> examples/input_graphs/input1.txt
+        to run part 2 with a given input graph:
+            $ python ex2.py 2 <n: up to 4> examples/input_graphs/input1.txt
+            (for linux- python3)
 ## See the results 
 
     examples for some runnings can be found under examples/res_part<1/2>
