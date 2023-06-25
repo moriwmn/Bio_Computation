@@ -1,6 +1,8 @@
 #python
 
 from sys import argv
+import sys
+import time
 import networkx as nx
 
 
@@ -33,23 +35,12 @@ def isomorphy_already_in_list(glist, graph):
             return True
     return False
 
-#   main functions: **********
-
-
-def part1(input_n):
-    # go over all possible graphs
-    # for each one: 1. check if connected. 2. check if izomorphy to one of saved graphs
-    # new connected graphs will be saved in our list.
-    # print: all graphs & overall count.
-    n = int(input_n)
+# *********  main functions: **********
+def all_connected_graphs(n) -> list:
+    n = int(n)
     complete_graph = nx.DiGraph(nx.complete_graph(n))
 
-
-
-    # print(complete_graph.nodes())
-    # printGraph(complete_graph)
-
-    # generate all possible graphs:
+    # generate all possible graphs, remove isomorphic graphs in each iteration:
     graphs = []
     lastI_graphs = []
     graphs.append(complete_graph)
@@ -57,24 +48,34 @@ def part1(input_n):
     edges_in_com_graph = (n*(n-1))
     for i in range(0,edges_in_com_graph-(n-1)):
         new_graphs = RemoveOneEdges(lastI_graphs)
+        new_non_iso_graphs = []
         for new_graph in new_graphs:
-            graphs.append(new_graph)
-        lastI_graphs = new_graphs
+            if nx.is_weakly_connected(new_graph):
+                if (not isomorphy_already_in_list(new_non_iso_graphs,new_graph)):
+                    graphs.append(new_graph)
+                    new_non_iso_graphs.append(new_graph)
+        lastI_graphs = new_non_iso_graphs
+    return graphs
 
-    graphs.reverse()
-    saved_graphs = []
-    count = 0
+def part1(input_n):
+    print("********************")
+    print("****** part 1 ******")
+    print("********************")
+    print("")
 
+    n = int(input_n)
+    t1 = time.time()
+    graphs = all_connected_graphs(n)
+    t2 = time.time()
+    print("printing all connected graphs with %d vertices", n)
+    print("overall calculation time: ", (t2-t1)/60, "min")
+    print("")
+    print("overall count = ",len(graphs))
+    index = 1 
     for graph in graphs:
-        if nx.is_weakly_connected(graph):
-            if (not isomorphy_already_in_list(saved_graphs,graph)):
-                saved_graphs.append(graph)
-                count += 1
-
-    print("count = ",count)  
-    for graph in saved_graphs:
-        print("#")
+        print("#",index)
         printGraph(graph)
+        index+=1
 
 
 def part2(n, graph):
@@ -87,12 +88,16 @@ def main(input_args):
     else: 
         if (ex_part == "2"):
             part2(input_args[2],input_args[3])
+        else:
+            print("Invalid command arguments")
  
 
 if __name__=="__main__":
+    if (len(sys.argv)<2):
+        print("Usage: python ex2.py <part:1/2> <n> <for part 2: path to input graph>")
+        exit(-1)
     main(argv)
 
-#  Usage: python ex2.py <part:1/2> <n: first arg to both parts> <graph: input to part 2 (optional)>
 
 
 # input: positive integer 𝑛 and generates all connected sub-graphs of size
